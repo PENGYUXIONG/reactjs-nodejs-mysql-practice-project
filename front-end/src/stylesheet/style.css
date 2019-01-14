@@ -1,0 +1,18 @@
+body{
+  color: black;
+}
+
+.Home{
+  
+  text-align: center;
+  font-size: 30px;
+  color: whitesmoke;
+  padding: 10px;
+  margin: auto;
+  background: black;
+}
+
+.userBtn{
+  background: grey;
+  text-align: center;
+}
