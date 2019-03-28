@@ -4,17 +4,20 @@
   "description": "this is the backend package",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init": "db-migrate db:create devDb",
+    "build": "db-migrate up --config ./Db/database.json --migrations-dir ./Db/migrations",
+    "delete": "db-migrate down --config ./Db/database.json --migrations-dir ./Db/migrations"
   },
   "author": "Pengyu Xiong",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
+    "db-migrate-mysql": "^1.1.10",
     "express": "^4.16.4",
     "http": "0.0.0",
     "mysql": "^2.16.0",
-    "mysql-migrations": "^1.0.6",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0"
   },

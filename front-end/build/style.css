@@ -1,12 +1,21 @@
-body{
-  color: silver;
+html, body, div{
+  height: 100%;
 }
 
-.Home{
-  
+.app-header{
   text-align: center;
+  min-height: 80px;
+  min-width: 100%;
   font-size: 30px;
-  color: black;
+  color: whitesmoke;
   padding: 10px;
   margin: auto;
+  background: black;
+}
+
+UserBtn{
+  min-width: 50px;
+  min-height: 50px;
+  background: black;
+  text-align: center;
 }
