@@ -1,18 +1,42 @@
-body{
+html, body{
+  height: 100%;
+}
+
+h1{
+  text-align: center;
+}
+
+ul {
+  width: 75%;
+  display: table;
+  table-layout: fixed;
+}
+
+ul ul {
+  size: 20%;
+  display: table-cell;
+}
+
+ul ul a {
+  text-align: center;
+  display: block;
+  color: aliceblue;
+}
+
+.header a:hover {
+  background-color: #ddd;
   color: black;
 }
 
-.Home{
-  
-  text-align: center;
-  font-size: 30px;
+.header{
+  min-height: 80px;
+  min-width: 100%;
   color: whitesmoke;
   padding: 10px;
-  margin: auto;
   background: black;
 }
 
-.userBtn{
-  background: grey;
-  text-align: center;
+.choiceSection{
+  position: relative;
+  max-width: 50%;
 }
