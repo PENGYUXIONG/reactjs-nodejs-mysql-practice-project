@@ -1,10 +1,10 @@
 router = require('express').Router();
+bodyParser = require('body-parser');
+router.use(bodyParser.json());
 
-router.get('/login', (req, res)=>{
-    res.send({
-        status: 200,
-        message: 'This is log in page',
-    });
+router.post('/login', (req, res)=>{
+    
+    console.log(req.body)       
 });
 
 router.get('/signup', (req, res)=> {

@@ -12,11 +12,13 @@
   "author": "Pengyu Xiong",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.3",
+    "cors": "^2.8.5",
     "db-migrate-mysql": "^1.1.10",
     "express": "^4.16.4",
-    "http": "0.0.0",
+    "fs": "0.0.1-security",
+    "http-proxy-middleware": "^0.19.1",
     "mysql": "^2.16.0",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0"
