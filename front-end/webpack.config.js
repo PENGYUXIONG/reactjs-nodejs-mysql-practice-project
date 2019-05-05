@@ -37,7 +37,11 @@ const config = {
     ]
 	},
 	devServer:{
-		port: 8000
+		port: 8000,
+		open: true,
+		proxy: {
+      '/': 'http://localhost:8008'
+    }
 	},
 	performance:{
 		hints: false
