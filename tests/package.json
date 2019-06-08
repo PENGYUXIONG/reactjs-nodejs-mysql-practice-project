@@ -8,7 +8,8 @@
   },
   "author": "Pengyu Xiong",
   "license": "ISC",
-  "devDependencies": {
-    "eslint": "^5.10.0"
+  "devDependencies": {},
+  "dependencies": {
+    "eslint": "^5.16.0"
   }
 }

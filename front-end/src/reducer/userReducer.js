@@ -14,5 +14,10 @@ export default function(state = initialState, action) {
         ...state,
         items: action.payload
       };
-  }
+    case SIGN_UP:
+      return {
+        ...state,
+        items: action.payload
+      };
+  };
 }
