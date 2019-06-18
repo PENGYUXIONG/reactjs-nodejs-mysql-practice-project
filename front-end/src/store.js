@@ -14,6 +14,4 @@ const initStore = createStore(
   applyMiddleware(...middleWare)
 );
 
-
-
 export default initStore;

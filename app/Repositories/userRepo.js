@@ -1,28 +1,30 @@
-let queryError = require('../Exceptions/queryError')
-let mysql = require('mysql');
-// database connection configuration
-let config = {
-	host : 'localhost',
-	user : 'root',
-	password : 'password',
-	database : 'devDb'
-};
+queryError = require('../Exceptions/queryError');
+databaseError = require('../Exceptions/databaseError');
+connection = require('../Db/connection');
 
-// create connection to database and run  query
-function connectDb(query, parameter=Null) {
-	let connection = mysql.createConnection(config);
-	connection.query(query, parameter, function(err){
-		if (err) throw new queryError('failed to save user data to sql database');
-	});
-	connection.end();
-};
 
 class userRepo{
+	fetchUser(userName, passWord, callback){
+		let query = `SELECT * FROM users WHERE name = ? AND password = ?`;
+		let parameter = [userName, passWord];
+		
+		connection.query(query, parameter, (err, result)=>{
+			if (err) throw new queryError('query failed! cannot fetch user from the database');
+			else if (result.length === 0)callback(null, false);
+			else{
+				let formatedResult = JSON.parse(JSON.stringify(result[0]));
+				console.log(formatedResult);
+				callback(null, formatedResult);
+			}
+		});
+	}
 	saveUser(userName, passWord){
-		let sql = `INSERT INTO users(name, password)
+		let query = `INSERT INTO users(name, password)
 		VALUES(? , ?)`;
-		let parameter = [userName, passWord]
-		connectDb(sql, parameter);
+		let parameter = [userName, passWord];
+		connection.query(query, parameter, (err, result)=>{
+			if (err) throw new queryError('query failed! cannot save the new user to database');
+		});
 	}
 };
 

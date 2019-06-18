@@ -1,43 +1,96 @@
-html, body{
-  height: 100%;
-}
-
-h1{
-  text-align: center;
-}
-
-ul {
-  width: 75%;
-  display: table;
-  table-layout: fixed;
-}
-
-ul ul {
-  size: 20%;
-  display: table-cell;
-}
-
-ul ul a {
-  text-align: center;
-  display: block;
-  color: aliceblue;
-}
-
-.header a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.header{
-  min-height: 80px;
+.navBar{
   min-width: 100%;
-  color: whitesmoke;
-  padding: 10px;
-  background: black;
+  position: fixed;
+  background: #000000;
+  color: white;
+  min-height: 48px;
+}
+
+.toolbarLogo{
+  margin-left: 2rem;
+}
+
+.toolbarLogo a{
+  color: white;
+  font-size: 2rem;
+  text-decoration: white;
+}
+
+.toolbar_navigation{
+  display: flex;
+  height: 100%;
+  align-items: center;
+  padding: 0;
+}
+
+.navList ul{
+  list-style: None;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navList li{
+  padding: 0 0.5rem;
+  margin-right: 2rem;
+}
+
+.navList a{
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.navList a:hover,
+.navList a:active{
+  color: yellow;
+}
+
+.choiceSection{
+  position: fixed;
+  margin-top: 5rem;
+  min-height: 56px;
+  width: 100%;
 }
 
 .loginLayout{
-  position: relative;
+  position: fixed;
   max-width: 50%;
-  margin-top: 2rem;
+}
+
+.space{
+  flex: 1;
+}
+
+.toggleBtn{
+  display: flex;
+  flex-direction: column;
+  height: 24px;
+  width: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  justify-content: space-around;
+}
+
+.toggleBtn:focus{
+  outline: none;
+}
+
+.toggleBtn-line{
+  width: 30px;
+  height: 2px;
+  background: white;
+  margin-right: 2rem;
+}
+
+.side-drawer{
+  height: 100%;
+  background: white;
+  box-shadow: 2px 0px 5px black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px
 }

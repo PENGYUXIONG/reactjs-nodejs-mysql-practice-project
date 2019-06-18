@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
-import Header from './commonElements/Header.js';
+import Header from './commonElements/Header';
+import NavBar from './commonElements/Navbar';
+import sideDrawer from './commonElements/sideDrawer/SideDrawer'
+import userProfile from './commonElements/UserProfile';
+import defaultLoginBtn from './commonElements/DefaultLoginBtn';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
-import { login } from '../actions/loginAction.js';
+import { login } from '../actions/loginAction';
 
 class Home extends Component{
   constructor(props){
@@ -14,6 +18,11 @@ class Home extends Component{
 
      this.onChange = this.onChange.bind(this);
      this.onSubmit = this.onSubmit.bind(this);
+     this.handleAccountStatus = this.handleAccountStatus.bind(this);
+  }
+
+  componentDidUpdate(){
+    console.log(this.props.items);
   }
 
   onChange(event){
@@ -31,39 +40,48 @@ class Home extends Component{
     this.props.login(credential);
   }
 
+  handleAccountStatus(props){
+    const IsloggedIn = props.items;
+    if (IsloggedIn){
+      return <userProfile />;
+    }
+
+  }
+
   render(){
     return(
-      <div> 
-        <div className="header">
-          <Header/>
-        </div>
-        <div className="choiceSection">
-          <form onSubmit={this.onSubmit}>
-            <div>
-            <label> Username:  </label>
-            <br/>
-              <input
-                type="text"
-                name="userName"
-                onChange={this.onChange}
-                value={this.state.userName}/>
-              <br/>
-            </div>
-            <div>
-              <label>
-                Password:
-              </label>
-              <br/>
-              <input
-                type="text"
-                name="passWord"
-                onChange={this.onChange}
-                value={this.state.passWord}/>
-            </div>
-            <br/>
-            <input type="submit" value="log in"/>
-          </form>
-          </div>
+      <div className="mainPage"> 
+          <NavBar />
+          <sideDrawer />
+          <main className="choiceSection">
+            <div className="loginLayout">
+              <form onSubmit={this.onSubmit}>
+                <div>
+                <label> Username:  </label>
+                <br/>
+                  <input
+                    type="text"
+                    name="userName"
+                    onChange={this.onChange}
+                    value={this.state.userName}/>
+                  <br/>
+                </div>
+                <div>
+                  <label>
+                    Password:
+                  </label>
+                  <br/>
+                  <input
+                    type="text"
+                    name="passWord"
+                    onChange={this.onChange}
+                    value={this.state.passWord}/>
+                </div>
+                <br/>
+                <input type="submit" value="log in"/>
+              </form>
+              </div>
+          </main>
         </div>
     )
   }
@@ -73,4 +91,9 @@ Home.propTypes = {
   login: propTypes.func.isRequired
 };
 
-export default connect(null, {login})(Home);
+function mapStateToProps (state){
+  return{
+    items: state.user.items
+  }
+}
+export default connect(mapStateToProps, {login})(Home);
