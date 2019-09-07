@@ -2,7 +2,7 @@ import {LOG_IN, SIGN_UP} from '../actionTypes/ACCOUNT_ACTION.js';
 
 
 const initialState = {
-
+  loggedIn: false
 }
 
 export default (state = initialState, action)=> {
@@ -12,12 +12,12 @@ export default (state = initialState, action)=> {
     case LOG_IN:
       return {
         ...state,
-        items: action.payload
+        loggedIn: action.payload[0],
+        username: action.payload[1]
       };
     case SIGN_UP:
       return {
         ...state,
-        items: action.payload
       };
   };
 }
