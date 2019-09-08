@@ -30,12 +30,9 @@
   display: flex;
 }
 
-.navList li{
+.navList a{
   padding: 0 0.5rem;
   margin-right: 2rem;
-}
-
-.navList a{
   color: white;
   text-decoration: none;
   font-size: 1rem;

@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 import { render } from 'react-dom';
 import initStore from './store.js';
 import {Provider} from 'react-redux';

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
 import DrawerToggleBtn from '../commonElements/sideDrawer/DrawerToggleBtn';
 
 const NavBar = (props) =>{
@@ -12,8 +13,9 @@ const NavBar = (props) =>{
         <div className='space' />
         <div className="navList">
           <ul>
-            <li><a href = '/AddFriend'>Add New Friend</a></li>
-            <li><a href = '/CreateRoom'>Create Room</a></li>
+            <Link to="/addfriend">Add New Friend</Link>
+            <Link to="/createroom">Create Room</Link>
+            <Link to="/signup">Sign Up</Link>
           </ul>
         </div>
       </nav>
