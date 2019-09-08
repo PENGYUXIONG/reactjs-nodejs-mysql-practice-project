@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Header from './commonElements/Header';
 import NavBar from './commonElements/Navbar';
 import sideDrawer from './commonElements/sideDrawer/SideDrawer'
-import userProfile from './commonElements/UserProfile';
 import defaultLoginBtn from './commonElements/DefaultLoginBtn';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -44,7 +43,7 @@ class Home extends Component{
   handleAccountStatus(props){
     const IsloggedIn = props.IsloggedIn;
     if (IsloggedIn){
-      return <userProfile />;
+      return 0;
     }
 
   }

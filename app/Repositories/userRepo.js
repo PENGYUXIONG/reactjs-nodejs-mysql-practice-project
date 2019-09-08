@@ -18,6 +18,19 @@ class userRepo{
 			}
 		});
 	}
+
+	isValidUser(userName, callback){
+		let query = `SELECT * FROM users WHERE name=?`;
+		let parameter = userName;
+		connection.query(query, parameter, (err, result)=>{
+			if (err) throw new queryError('query failed! cannot fetch user to database');
+			else if (result.length !== 0)callback(null, false);
+			else{
+				callback(null, true);
+			}
+		});
+	}
+
 	saveUser(userName, passWord){
 		let query = `INSERT INTO users(name, password)
 		VALUES(? , ?)`;
@@ -26,6 +39,6 @@ class userRepo{
 			if (err) throw new queryError('query failed! cannot save the new user to database');
 		});
 	}
-};
+}
 
 module.exports = new userRepo()
