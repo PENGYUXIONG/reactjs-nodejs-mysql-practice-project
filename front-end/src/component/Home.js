@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import Header from './commonElements/Header';
 import NavBar from './commonElements/Navbar';
 import sideDrawer from './commonElements/sideDrawer/SideDrawer'
-import userProfile from './commonElements/UserProfile';
 import defaultLoginBtn from './commonElements/DefaultLoginBtn';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { login } from '../actions/loginAction';
+import store from '../store';
 
 class Home extends Component{
   constructor(props){
@@ -16,13 +16,13 @@ class Home extends Component{
       passWord: ''
      };
 
+     store.subscribe(()=>{
+       console.log(store.getState());
+     })
+
      this.onChange = this.onChange.bind(this);
      this.onSubmit = this.onSubmit.bind(this);
      this.handleAccountStatus = this.handleAccountStatus.bind(this);
-  }
-
-  componentDidUpdate(){
-    console.log(this.props.items);
   }
 
   onChange(event){
@@ -41,9 +41,9 @@ class Home extends Component{
   }
 
   handleAccountStatus(props){
-    const IsloggedIn = props.items;
+    const IsloggedIn = props.IsloggedIn;
     if (IsloggedIn){
-      return <userProfile />;
+      return 0;
     }
 
   }
@@ -93,7 +93,7 @@ Home.propTypes = {
 
 function mapStateToProps (state){
   return{
-    items: state.user.items
+    loggedIn: state.user.loggedIn
   }
 }
 export default connect(mapStateToProps, {login})(Home);

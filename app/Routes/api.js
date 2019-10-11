@@ -6,24 +6,33 @@ router.use(bodyParser.json());
 //import exceptions
 generalError = require('../Exceptions/generalError');
 // import services from the other files
-userServices = require('../Services/userServices');
+userController = require('../Controller/userController');
 
 // endpoints apis start
 
-router.post('/login', (req, res)=>{
+router.post('/login', (req, res, next)=>{
     console.log(req.body, 'login');
-    userServices.checkUser(req.body['userName'], req.body['passWord'], function(err, userExistBoolean){
-        if (err) throw new generalError;
+    userController.checkUser(req.body['userName'], req.body['passWord'], function(err, userExistBoolean){
+        if (err) throw new generalError('internal error code 500');
         else{
             console.log(userExistBoolean);
             res.send(userExistBoolean);
         }
     });
+    next();
 });
 
-router.get('/signup', (req, res)=> {
-    console.log(req.body);
-    userServices.saveUser(req.body['userName'], req.body['passWord']);
+router.post('/signup', (req, res)=> {
+    console.log('sign up page!');
+    res.send('sign up page!');
+    // console.log(req.body);
+    // userController.saveUser(req.body['userName'], req.body['passWord'], function(err, userSavedBoolean){
+    //     if (err) throw new generalError('internal error code 500');
+    //     else{
+    //         console.log(userSavedBoolean);
+    //         res.send(userSavedBoolean);
+    //     }
+    // });
 });
 
 module.exports = router;

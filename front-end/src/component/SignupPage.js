@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Header from './commonElements/Header';
 
-class signupPage extends Component{
+class SignupPage extends Component{
   render(){
     return(
       <div className="signup">
@@ -14,4 +14,4 @@ class signupPage extends Component{
   }
 }
 
-export default signupPage;
+export default SignupPage;
