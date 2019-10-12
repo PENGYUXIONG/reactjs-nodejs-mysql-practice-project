@@ -2,18 +2,19 @@ import React from 'react';
 import { render } from 'react-dom';
 import initStore from './store.js';
 import {Provider} from 'react-redux';
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import SignupPage from './component/SignupPage';
 import Home from './component/Home';
-import Signup from './component/SignupPage';
 import './stylesheet/style.css';
 
 render(
   <Provider store={initStore}>
     <Router>
-      <switch>
+      <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/signup" component={Signup} />
-      </switch>
+        <Route exact path="/signup" component={SignupPage} />
+        <Route component={SignupPage} />
+      </Switch>
     </Router>
   </Provider>,
   document.getElementById('root')

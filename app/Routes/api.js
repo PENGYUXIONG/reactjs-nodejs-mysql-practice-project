@@ -11,14 +11,6 @@ userController = require('../Controller/userController');
 
 // endpoints apis start
 
-router.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, '../../front-end/src/index.html'), function(err) {
-      if (err) {
-        res.status(500).send(err)
-      }
-    })
-  })
-
 router.post('/login', (req, res)=>{
     console.log(req.body, 'login');
     userController.checkUser(req.body['userName'], req.body['passWord'], function(err, userExistBoolean){

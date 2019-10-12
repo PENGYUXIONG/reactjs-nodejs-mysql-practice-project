@@ -9,7 +9,9 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const config = {
 	mode: 'production',
   // Entry point will be in the src folder, file will be named index.js
-  entry: './src/index.js',
+  entry: {
+    Home: './src/index.js',
+  },
   // Send the files to the build folder, create one if it isn't present
     output: {
         path: path.resolve(__dirname,'build'),
