@@ -54,6 +54,7 @@
 
 .loginLayout{
   margin: auto;
+  margin-top: 2rem;
 }
 
 .space{
@@ -91,4 +92,14 @@
   top: 0;
   left: 0;
   width: 400px
+}
+
+.log-in-fail-alert {
+  margin-top: 3%;
+  color: red;
+}
+.log-in-fail-alert a{
+  color: blue;
+  font-style: italic;
+  text-decoration: underline;
 }

@@ -13,9 +13,8 @@ const NavBar = (props) =>{
         <div className='space' />
         <div className="navList">
           <ul>
-            <Link to="/addfriend">Add New Friend</Link>
-            <Link to="/createroom">Create Room</Link>
             <Link to="/signup">Sign Up</Link>
+            <Link to="/aboutus">About Us</Link>
           </ul>
         </div>
       </nav>
