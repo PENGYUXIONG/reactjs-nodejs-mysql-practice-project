@@ -18,12 +18,12 @@ class userServices{
 			});
 	}
 
-	saveUser(userName, passWord, callback) {
+	saveUser(userName, passWord, email, callback) {
 		userRepo.isValidUser(userName, function(err, userNotExistBoolean){
 			if (err) throw new generalError('unknown error occured!');
 			else{
 				if (userNotExistBoolean){
-					userRepo.saveUser(userName, passWord, function(err){
+					userRepo.saveUser(userName, passWord, email, function(err){
 						if (err) throw new generalError('unknow error occured!');
 					});
 				}

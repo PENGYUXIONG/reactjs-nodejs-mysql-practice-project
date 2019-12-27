@@ -13,8 +13,8 @@ class userController{
 		});
   }
   
-  saveUser(userName, passWord, callback){
-    userService.saveUser(userName, passWord, function(err, saveUserBoolean){
+  saveUser(userName, passWord, email, callback){
+    userService.saveUser(userName, passWord, email, function(err, saveUserBoolean){
       if (err) throw new generalError('unknown error occured!');
       else{
         callback(null, saveUserBoolean);

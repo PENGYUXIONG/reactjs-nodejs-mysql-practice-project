@@ -24,7 +24,7 @@ router.post('/login', (req, res)=>{
 
 router.post('/signup', (req, res)=> {
     console.log(req.body);
-    userController.saveUser(req.body['userName'], req.body['passWord'], function(err, userSavedBoolean){
+    userController.saveUser(req.body['userName'], req.body['passWord'], req.body['email'], function(err, userSavedBoolean){
         if (err) throw new generalError('internal error code 500');
         else{
             console.log(userSavedBoolean);

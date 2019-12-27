@@ -31,10 +31,10 @@ class userRepo{
 		});
 	}
 
-	saveUser(userName, passWord){
-		let query = `INSERT INTO users(name, password)
-		VALUES(? , ?)`;
-		let parameter = [userName, passWord];
+	saveUser(userName, passWord, email){
+		let query = `INSERT INTO users(name, password, email)
+		VALUES(? , ?, ?)`;
+		let parameter = [userName, passWord, email];
 		connection.query(query, parameter, (err, result)=>{
 			if (err) throw new queryError('query failed! cannot save the new user to database');
 		});
