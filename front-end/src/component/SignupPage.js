@@ -1,13 +1,30 @@
 import React, {Component} from 'react';
+import { Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Header from './commonElements/Header';
+
+import NavBar from './commonElements/Navbar';
+import signup from '../actions/signupAction';
+import {Link} from 'react-router-dom';
+import sideDrawer from './commonElements/sideDrawer/SideDrawer';
+
 
 class SignupPage extends Component{
+  constructor(props){
+    super(props);
+  }
   render(){
     return(
-      <div className="signup">
+      <div className="signupPage">
+        <NavBar/>
+        <sideDrawer/>
+        <main className="pageContent">
+          <div className="signUpForm">
+            
+          </div>
 
-        
+          </main>
       </div>
     )
   }

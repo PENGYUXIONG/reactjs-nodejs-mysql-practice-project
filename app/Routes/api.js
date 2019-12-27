@@ -23,16 +23,14 @@ router.post('/login', (req, res)=>{
 });
 
 router.post('/signup', (req, res)=> {
-    console.log('sign up page!');
-    res.send('sign up page!');
-    // console.log(req.body);
-    // userController.saveUser(req.body['userName'], req.body['passWord'], function(err, userSavedBoolean){
-    //     if (err) throw new generalError('internal error code 500');
-    //     else{
-    //         console.log(userSavedBoolean);
-    //         res.send(userSavedBoolean);
-    //     }
-    // });
+    console.log(req.body);
+    userController.saveUser(req.body['userName'], req.body['passWord'], function(err, userSavedBoolean){
+        if (err) throw new generalError('internal error code 500');
+        else{
+            console.log(userSavedBoolean);
+            res.send(userSavedBoolean);
+        }
+    });
 });
 
 module.exports = router;

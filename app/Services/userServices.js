@@ -4,14 +4,14 @@ generalError = require('../Exceptions/generalError');
 
 class userServices{
 	getUser(userName, passWord, callback){
-		userRepo.isValidUser(userName, function(err, userSavedBoolean){
+		userRepo.isValidUser(userName, function(err, userNotExistBoolean){
 			if (err) throw new generalError('unknown error occured!');
 			else{
 					userRepo.fetchUser(userName,passWord, function(err, user){
 						if (err) throw new generalError('unknown error occured!');
 						else{
 							// valid user means username does not exist
-							callback(null, !userSavedBoolean, user);
+							callback(null, !userNotExistBoolean, user);
 						}
 					});
 				}
@@ -19,15 +19,15 @@ class userServices{
 	}
 
 	saveUser(userName, passWord, callback) {
-		userRepo.isValidUser(userName, function(err, userSavedBoolean){
+		userRepo.isValidUser(userName, function(err, userNotExistBoolean){
 			if (err) throw new generalError('unknown error occured!');
 			else{
-				if (userSavedBoolean){
+				if (userNotExistBoolean){
 					userRepo.saveUser(userName, passWord, function(err){
 						if (err) throw new generalError('unknow error occured!');
 					});
 				}
-				callback(null, userSavedBoolean);
+				callback(null, userNotExistBoolean);
 			}
 		});
 	}

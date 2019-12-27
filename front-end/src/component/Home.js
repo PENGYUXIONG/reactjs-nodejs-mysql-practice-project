@@ -3,8 +3,6 @@ import propTypes, { element } from 'prop-types';
 import {connect} from 'react-redux';
 import { Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
-import { Alert } from 'react-bootstrap';
-
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -13,7 +11,6 @@ import { login } from '../actions/loginAction';
 import {Link} from 'react-router-dom';
 import store from '../store';
 import sideDrawer from './commonElements/sideDrawer/SideDrawer';
-import SubAlert from './commonElements/SubAlert';
 
 class Home extends Component{
   constructor(props){
@@ -118,7 +115,7 @@ class Home extends Component{
       <div className="mainPage"> 
           <NavBar />
           <sideDrawer />
-          <main className="choiceSection">
+          <main className="pageContent">
             <div className="loginLayout" >
                 {element}
               </div>
