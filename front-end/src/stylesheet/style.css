@@ -57,6 +57,11 @@
   margin-top: 2rem;
 }
 
+.signUpForm{
+  margin: auto;
+  margin-top: 2rem;
+}
+
 .space{
   flex: 1;
 }

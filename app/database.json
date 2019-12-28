@@ -1,6 +1,6 @@
 {
   "dev": {
-    "host": "localhost",
+    "host": "http://127.0.0.1",
     "password": "password",
     "user": "root",
     "driver": "mysql",

@@ -39,7 +39,8 @@ const config = {
     ]
 	},
 	devServer:{
-		port: 8000,
+    port: 8000,
+    historyApiFallback: true,
 		open: true,
 		proxy: {
       '/': 'http://localhost:8008'

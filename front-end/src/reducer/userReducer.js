@@ -15,7 +15,8 @@ export default (state = initialState, action)=> {
         ...state,
         loggedIn: action.payload[0],
         signedUp: action.payload[1],
-        username: action.payload[2]
+        userId: action.payload[2],
+        userName: action.payload[3]
       };
     case SIGN_UP:
       return {

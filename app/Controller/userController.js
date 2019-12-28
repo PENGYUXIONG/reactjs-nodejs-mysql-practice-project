@@ -8,7 +8,7 @@ class userController{
 			if (err) throw new generalError('unknown error occured');
 			else if (!user) callback(null, [false, userSavedBoolean, ""]);
 			else{
-				callback(null, [true, userSavedBoolean, userName]);
+				callback(null, [true, userSavedBoolean,user.id, userName]);
 			}
 		});
   }
