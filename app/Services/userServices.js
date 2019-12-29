@@ -25,7 +25,9 @@ class userServices{
 					userRepo.isValidEmail(email, function(err, emailNotExistBoolean){
 						if (err) throw new generalError('unknow error occured!');
 						else{
-							if (emailNotExistBoolean){
+							console.log('what the fuck' + (emailNotExistBoolean && userNotExistBoolean))
+							if (emailNotExistBoolean && userNotExistBoolean){
+								console.log('saving')
 								userRepo.saveUser(userName, passWord, email, function(err){
 									if (err) throw new generalError('unknow error occured!');
 								});
@@ -33,7 +35,7 @@ class userServices{
 							callback(null, userNotExistBoolean, emailNotExistBoolean);
 						}
 					})
-			}
+				}
 		});
 	}
 }

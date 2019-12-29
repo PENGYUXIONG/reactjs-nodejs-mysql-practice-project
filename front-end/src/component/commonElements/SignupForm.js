@@ -21,15 +21,30 @@ class SignupForm extends Component{
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
-  
-  onChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-    if (event.target.name == 'email'){
-      console.log('change', this.state.signedUpAvailable)
-      this.setState({ emailAvilable: 'whatx' });
-      console.log(this.state)
+
+  componentWillUpdate(nextProps){
+
+    if (nextProps.signedUpAvailable.userName !== this.props.signedUpAvailable.userName){
+        this.setState({userNameAvilable: nextProps.signedUpAvailable.userName});
+      }  else if(!nextProps.signedUpAvailable.userName && !this.props.signedUpAvailable.userName && this.state.userNameAvilable){
+        this.setState({userNameAvilable: false});
+      }
+
+    if (nextProps.signedUpAvailable.email !== this.props.signedUpAvailable.email){
+      this.setState({emailAvilable: nextProps.signedUpAvailable.email});
+    }  else if(!nextProps.signedUpAvailable.email && !this.props.signedUpAvailable.email && this.state.emailAvilable){
+      this.setState({emailAvilable: false});
     }
+  }
+  
+
+  onChange(event) {
+    if (event.target.name == 'email'){
+      this.setState({emailAvilable: true});
+    } else if (event.target.name == 'userName'){
+      this.setState({userNameAvilable: true});
+    }
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSubmit(event){
@@ -43,6 +58,9 @@ class SignupForm extends Component{
     } else if(!emailPattern.test(this.state.email)){
       console.log('email is invalid')
     }else{
+      this.setState({userNameAvilable: true});
+      this.setState({emailAvilable: true});
+
       const credential = {
         userName: this.state.userName,
         passWord: this.state.passWord,
@@ -63,8 +81,6 @@ class SignupForm extends Component{
     const emailPattern = 
     new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
 
-    this.state.userNameAvilable = this.props.signedUpAvailable.userName;
-    this.state.emailAvilable = this.props.signedUpAvailable.email;
     if (!this.state.userNameAvilable && this.state.userName.length >= 4){
       userNameErrMsg = "Username already exist.";
     } 
