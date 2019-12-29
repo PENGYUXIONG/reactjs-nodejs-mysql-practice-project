@@ -22,12 +22,17 @@ class userServices{
 		userRepo.isValidUser(userName, function(err, userNotExistBoolean){
 			if (err) throw new generalError('unknown error occured!');
 			else{
-				if (userNotExistBoolean){
-					userRepo.saveUser(userName, passWord, email, function(err){
+					userRepo.isValidEmail(email, function(err, emailNotExistBoolean){
 						if (err) throw new generalError('unknow error occured!');
-					});
-				}
-				callback(null, userNotExistBoolean);
+						else{
+							if (emailNotExistBoolean){
+								userRepo.saveUser(userName, passWord, email, function(err){
+									if (err) throw new generalError('unknow error occured!');
+								});
+							}
+							callback(null, userNotExistBoolean, emailNotExistBoolean);
+						}
+					})
 			}
 		});
 	}

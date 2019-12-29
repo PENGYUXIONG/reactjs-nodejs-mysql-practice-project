@@ -14,10 +14,10 @@ class userController{
   }
   
   saveUser(userName, passWord, email, callback){
-    userService.saveUser(userName, passWord, email, function(err, saveUserBoolean){
+    userService.saveUser(userName, passWord, email, function(err, UserNotExistBoolean, EmailNotExistBoolean){
       if (err) throw new generalError('unknown error occured!');
       else{
-        callback(null, saveUserBoolean);
+        callback(null, UserNotExistBoolean, EmailNotExistBoolean);
       }
     });
   }
