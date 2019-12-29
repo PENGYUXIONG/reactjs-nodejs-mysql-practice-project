@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import { Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
-import {Col, InputGroup} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {signup} from '../../actions/signupAction';
-
-import store from '../../store';
 
 class SignupForm extends Component{
   constructor(props){
@@ -16,25 +13,26 @@ class SignupForm extends Component{
       userName: '',
       passWord: '' ,
       email: '',
-      passWord1: ''
+      passWord1: '',
+      userNameAvilable: true,
+      emailAvilable: true
     };
-
-    store.subscribe(()=>{
-       console.log(store.getState());
-       
-    })
 
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.isSignUpValid = this.isSignUpValid.bind(this);
   }
   
   
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
+    if (event.target.name == 'email'){
+      console.log('change', this.state.signedUpAvailable)
+      this.setState({ emailAvilable: 'whatx' });
+      console.log(this.state)
+    }
   }
 
-  handleSubmit(event, props){
+  handleSubmit(event){
     event.preventDefault();
     const emailPattern =
     new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i)
@@ -54,51 +52,55 @@ class SignupForm extends Component{
     }
   };
 
-  isSignUpValid(props){
-    console.log(props)
-  }
-
   render() {
+    if (this.props.signedUp === true){
+      window.location.href = "/SignupSuccess"
+    }
+
+    let userNameErrMsg = "Please choose a username that is longer than 4 characters.";
+    let emailErrMsg = "Please provide a valid Email.";
+
     const emailPattern = 
-    new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i)
-    this.isSignUpValid(this.props);
+    new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+
+    this.state.userNameAvilable = this.props.signedUpAvailable.userName;
+    this.state.emailAvilable = this.props.signedUpAvailable.email;
+    if (!this.state.userNameAvilable && this.state.userName.length >= 4){
+      userNameErrMsg = "Username already exist.";
+    } 
+
+    if (!this.state.emailAvilable && emailPattern.test(this.state.email)){
+      emailErrMsg = "Email already exist." 
+    }
+
     return(
-    <Form noValidate onSubmit={this.handleSubmit}>
+    <Form onSubmit={this.handleSubmit}>
       <h2>Sign Up</h2>
       <hr />
-      <Form.Row>
-        <Form.Group as={Col} md="12" controlId="validationCustomUsername">
+        <Form.Group controlId="validationCustomUsername">
           <Form.Label>Username</Form.Label>
-          <InputGroup>
             <Form.Control
               type="text"
               placeholder="Username"
               aria-describedby="inputGroupPrepend"
               name="userName"
-              isInvalid={0 < this.state.userName.length && this.state.userName.length < 4}
+              isInvalid={0 < this.state.userName.length && this.state.userName.length < 4 || this.state.userNameAvilable == false}
               onChange={this.onChange}
               required
-              
             />
             <Form.Control.Feedback type="invalid">
-              Please choose a username that is longer than 4 characters.
+              {userNameErrMsg}
             </Form.Control.Feedback>
-          </InputGroup>
         </Form.Group>
-  
-      </Form.Row>
-      <Form.Row>
-        <Form.Group as={Col} md="12" controlId="validationEmail">
+        <Form.Group controlId="validationEmail">
           <Form.Label>Email</Form.Label>
           <Form.Control type="text" placeholder="Email" onChange={this.onChange} name="email" 
-          isInvalid={!emailPattern.test(this.state.email) && this.state.email} required />
+          isInvalid={!emailPattern.test(this.state.email) && this.state.email || this.state.emailAvilable == false} required />
           <Form.Control.Feedback type="invalid">
-            Please provide a valid Email.
+            {emailErrMsg}
           </Form.Control.Feedback>
         </Form.Group>
-      </Form.Row>
-      <Form.Row>
-        <Form.Group as={Col} md="12" controlId="validationPassword">
+        <Form.Group controlId="validationPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control type="text" placeholder="Password"  onChange={this.onChange} name="passWord" 
           isInvalid={0 < this.state.passWord.length && this.state.passWord.length < 4} required />
@@ -106,9 +108,7 @@ class SignupForm extends Component{
             Please enter a valid password that is longer than 4 characters.
           </Form.Control.Feedback>
         </Form.Group>
-      </Form.Row>
-      <Form.Row>
-        <Form.Group as={Col} md="12" controlId="validationConfirm">
+        <Form.Group controlId="validationConfirm">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control type="text" placeholder="Condirm Password" onChange={this.onChange} name="passWord1" 
           isInvalid={this.state.passWord1 !== this.state.passWord} required />
@@ -116,7 +116,6 @@ class SignupForm extends Component{
             Password does not match... Please enter password again.
           </Form.Control.Feedback>
         </Form.Group>
-      </Form.Row>
       <Form.Group>
         <Form.Check
           required
@@ -132,7 +131,8 @@ class SignupForm extends Component{
 
 function mapStateToProps (state){
   return{
-    signedUp: state.user.signedUp
+    signedUp: state.user.signedUp,
+    signedUpAvailable: state.user.signedUpAvailable
   }
 }
 

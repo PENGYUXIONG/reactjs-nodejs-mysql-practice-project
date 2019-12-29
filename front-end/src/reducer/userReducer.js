@@ -4,9 +4,9 @@ import {LOG_IN, SIGN_UP} from '../actionTypes/ACCOUNT_ACTION.js';
 const initialState = {
   signedUp: null,
   loggedIn: null,
-  signedUpErr: {
-    userName: "",
-    email: ""
+  signedUpAvailable: {
+    userName: true,
+    email: true
   }
 }
 
@@ -23,11 +23,11 @@ export default (state = initialState, action)=> {
         userName: action.payload[3]
       };
     case SIGN_UP:
-      const isSignedUp = Boolean(action.payload[0] | action.payload[1]);
+      const isSignedUp = Boolean(action.payload[0] & action.payload[1]);
       return {
         ...state,
         signedUp: isSignedUp,
-        signedUpErr: {
+        signedUpAvailable: {
           userName: action.payload[0],
           email: action.payload[1]
         },

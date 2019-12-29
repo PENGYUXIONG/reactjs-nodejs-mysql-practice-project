@@ -10,7 +10,7 @@ import NavBar from './commonElements/Navbar';
 import { login } from '../actions/loginAction';
 import {Link} from 'react-router-dom';
 import store from '../store';
-import sideDrawer from './commonElements/sideDrawer/SideDrawer';
+import SideDrawer from './commonElements/sideDrawer/SideDrawer';
 
 class Home extends Component{
   constructor(props){
@@ -114,7 +114,7 @@ class Home extends Component{
     return(
       <div className="mainPage"> 
           <NavBar />
-          <sideDrawer />
+          <SideDrawer />
           <main className="pageContent">
             <div className="loginLayout" >
                 {element}
