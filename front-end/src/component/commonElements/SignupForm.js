@@ -10,6 +10,7 @@ class SignupForm extends Component{
   constructor(props){
     super(props);
     this.state= {
+      signedUp: false,
       userName: '',
       passWord: '' ,
       email: '',
@@ -37,6 +38,11 @@ class SignupForm extends Component{
     }
   }
   
+  componentWillReceiveProps(nextProps){
+    if (nextProps.signedUp === true){
+      window.location.href = "/SignupSuccess";
+    }
+  }
 
   onChange(event) {
     if (event.target.name == 'email'){
@@ -71,9 +77,6 @@ class SignupForm extends Component{
   };
 
   render() {
-    if (this.props.signedUp === true){
-      window.location.href = "/SignupSuccess"
-    }
 
     let userNameErrMsg = "Please choose a username that is longer than 4 characters.";
     let emailErrMsg = "Please provide a valid Email.";
