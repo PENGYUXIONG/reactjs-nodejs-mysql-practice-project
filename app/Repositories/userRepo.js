@@ -4,9 +4,9 @@ connection = require('../Db/connection');
 
 
 class userRepo{
-	fetchUser(userName, passWord, callback){
-		let query = `SELECT * FROM users WHERE name = ? AND password = ?`;
-		let parameter = [userName, passWord];
+	fetchUser(userName, callback){
+		let query = `SELECT * FROM users WHERE name = ?`;
+		let parameter = [userName];
 		
 		connection.query(query, parameter, (err, result)=>{
 			if (err) throw new queryError('query failed! cannot fetch user from the database');

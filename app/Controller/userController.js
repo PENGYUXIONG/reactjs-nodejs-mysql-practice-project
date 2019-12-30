@@ -4,11 +4,10 @@ generalError = require('../Exceptions/generalError');
 
 class userController{
   checkUser(userName, passWord, callback){
-		userService.getUser(userName, passWord, function(err, userSavedBoolean, user){
+		userService.getValidateUser(userName, passWord, function(err, isLoggedIn, isSignedUp, user){
 			if (err) throw new generalError('unknown error occured');
-			else if (!user) callback(null, [false, userSavedBoolean, ""]);
-			else{
-				callback(null, [true, userSavedBoolean,user.id, userName]);
+      else{
+				callback(null, [isLoggedIn, isSignedUp, user]);
 			}
 		});
   }
