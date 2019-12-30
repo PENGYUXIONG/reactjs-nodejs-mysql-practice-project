@@ -5,9 +5,9 @@ export function signup(credential) {
     fetch('http://localhost:8008/signup', {
       method: 'POST',
       headers: {
-        'current-type': 'application/json'
+        'content-type': 'application/json'
       },
-      body: JSON.stringfy(credential)
+      body: JSON.stringify(credential)
     })
     .then(res => res.json())
     .then(post => dispatch({
