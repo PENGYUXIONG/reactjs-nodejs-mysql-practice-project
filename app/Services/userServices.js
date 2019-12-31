@@ -1,19 +1,24 @@
 // import user repo
 userRepo = require('../Repositories/userRepo');
 generalError = require('../Exceptions/generalError');
+bcryptjs = require('bcryptjs');
 
 class userServices{
-	getUser(userName, passWord, callback){
+	async getUser(userName, callback){
 		userRepo.isValidUser(userName, function(err, userNotExistBoolean){
 			if (err) throw new generalError('unknown error occured!');
 			else{
-					userRepo.fetchUser(userName,passWord, function(err, user){
-						if (err) throw new generalError('unknown error occured!');
-						else{
-							// valid user means username does not exist
-							callback(null, !userNotExistBoolean, user);
-						}
-					});
+				if (userNotExistBoolean){
+					callback(null, "");
+				} else{
+						userRepo.fetchUser(userName, function(err, user){
+							if (err) throw new generalError('unknown error occured!');
+							else{
+								// valid user means username does not exist
+								callback(null, user);
+							}
+						});
+					}
 				}
 			});
 	}
@@ -25,7 +30,6 @@ class userServices{
 					userRepo.isValidEmail(email, function(err, emailNotExistBoolean){
 						if (err) throw new generalError('unknow error occured!');
 						else{
-							console.log('what the fuck' + (emailNotExistBoolean && userNotExistBoolean))
 							if (emailNotExistBoolean && userNotExistBoolean){
 								console.log('saving')
 								userRepo.saveUser(userName, passWord, email, function(err){
@@ -36,6 +40,20 @@ class userServices{
 						}
 					})
 				}
+		});
+	}
+
+	getValidateUser(userName, passWord, callback) {
+		this.getUser(userName, async function(err, user){
+			if (err) throw new generalError('unknown error occured!');
+			else{
+				if (user){
+					const IsloggedIn = await bcryptjs.compare(passWord, user['password']);
+					callback(null, IsloggedIn, true, user);
+				} else{
+					callback(null, false, false, '');
+				}
+			}
 		});
 	}
 }
