@@ -15,12 +15,14 @@ export default (state = initialState, action)=> {
     default:
       return state;
     case LOG_IN:
+      localStorage.setItem('token', action.payload['token']);
       return {
         ...state,
-        loggedIn: action.payload[0],
-        signedUp: action.payload[1],
-        userId: action.payload[2],
-        userName: action.payload[3]
+        loggedIn: action.payload['userInfo'][0],
+        signedUp: action.payload['userInfo'][1],
+        userId: action.payload['userInfo'][2].id,
+        userName: action.payload['userInfo'][2].name,
+        email: action.payload['userInfo'][2].email
       };
     case SIGN_UP:
       const isSignedUp = Boolean(action.payload[0] & action.payload[1]);

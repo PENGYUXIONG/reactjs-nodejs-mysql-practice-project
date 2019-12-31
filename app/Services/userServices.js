@@ -4,7 +4,7 @@ generalError = require('../Exceptions/generalError');
 bcryptjs = require('bcryptjs');
 
 class userServices{
-	getUser(userName, callback){
+	async getUser(userName, callback){
 		userRepo.isValidUser(userName, function(err, userNotExistBoolean){
 			if (err) throw new generalError('unknown error occured!');
 			else{
