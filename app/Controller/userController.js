@@ -12,6 +12,15 @@ class userController{
 		});
   }
   
+  async getUser(userName, callback){
+    await userService.getUser(userName, async function(err, user){
+      if (err) throw new generalError('unknown error occureed, fail to fetch user')
+      else{
+        callback(null, user);
+      }
+    })
+  }
+
   saveUser(userName, passWord, email, callback){
     userService.saveUser(userName, passWord, email, function(err, UserNotExistBoolean, EmailNotExistBoolean){
       if (err) throw new generalError('unknown error occured!');
