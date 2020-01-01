@@ -15,7 +15,9 @@ export default (state = initialState, action)=> {
     default:
       return state;
     case LOG_IN:
-      localStorage.setItem('token', action.payload['token']);
+      if(action.payload['token']){;
+        localStorage.setItem('token', action.payload['token']);
+      }
       return {
         ...state,
         loggedIn: action.payload['userInfo'][0],

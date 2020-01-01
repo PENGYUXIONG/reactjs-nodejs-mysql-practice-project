@@ -16,25 +16,29 @@ userController = require('../Controller/userController');
 
 
 // endpoints apis start
-
 router.post('/login', async(req, res)=>{
     console.log(req.body, 'login');
     
     await userController.checkUser(req.body['userName'], req.body['passWord'], async function(err, userInfo){
         if (err) throw new generalError('internal error code 500');
         else{
+            const userExist = JSON.stringify(userInfo[0]);
+            console.log(userExist)
             const user = JSON.stringify(userInfo[2]);
-            console.log(user)
-            jwt.sign({user: user}, 'user-info', function(err, token){
-                if (err) {
-                    throw new generalError('unknown error occured, cannot generate token');
-                } else{
-                    res.json({
-                        userInfo,
-                        token
-                    });
-                }
-            });
+            if (userExist == 'true'){
+                jwt.sign({user: user}, 'user-info', function(err, token){
+                    if (err) {
+                        throw new generalError('unknown error occured, cannot generate token');
+                    } else{
+                        res.json({
+                            userInfo,
+                            token
+                        });
+                    }
+                });
+            } else{
+                res.json({userInfo})
+            }
         }
     });
 });
