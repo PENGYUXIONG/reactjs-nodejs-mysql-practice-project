@@ -23,7 +23,7 @@ class Home extends Component{
      };
 
      store.subscribe(()=>{
-      //  console.log(store.getState());
+       console.log(store.getState());
        
      })
 
@@ -31,6 +31,11 @@ class Home extends Component{
      this.onSubmit = this.onSubmit.bind(this);
      this.isChecked = this.isChecked.bind(this);
      this.handleAccountStatus = this.handleAccountStatus.bind(this);
+  }
+
+  componentWillReceiveProps(){
+    console.log(localStorage.getItem('token'))
+
   }
 
   isChecked(event){
@@ -60,10 +65,8 @@ class Home extends Component{
     } 
   }
 
-  handleAccountStatus(props){
-    let element;
-    const isLoggedIn = props.loggedIn;
-    
+  handleAccountStatus(){
+    let element;    
 
     let alert;
     if (this.props.signedUp === false){
@@ -74,7 +77,7 @@ class Home extends Component{
  
 
     // conditional rendering according to the login status
-    if (isLoggedIn){
+    if (localStorage.getItem('token')){
       element = 0;
     } else{
       element =       
@@ -110,7 +113,7 @@ class Home extends Component{
   }
 
   render(){
-    let element = this.handleAccountStatus(this.props);
+    let element = this.handleAccountStatus();
     return(
       <div className="mainPage"> 
           <NavBar />
@@ -126,7 +129,7 @@ class Home extends Component{
 }
 
 Home.propTypes = {
-  login: propTypes.func.isRequired
+  login: propTypes.func.isRequired,
 };
 
 function mapStateToProps (state){
