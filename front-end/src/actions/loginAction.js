@@ -10,10 +10,12 @@ export function login(credential) {
       body: JSON.stringify(credential)
     })
     .then(res => res.json())
-    .then(post => dispatch({
-      type: LOG_IN,
-      payload: post
+    .then(postData =>{ 
+      localStorage.setItem('token', postData['token']);
+      dispatch({
+        type: LOG_IN,
+        payload: postData
+      })
     })
-    )
   }
 }

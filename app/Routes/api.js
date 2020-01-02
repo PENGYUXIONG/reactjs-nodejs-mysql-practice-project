@@ -23,7 +23,6 @@ router.post('/login', async(req, res)=>{
         if (err) throw new generalError('internal error code 500');
         else{
             const userExist = JSON.stringify(userInfo[0]);
-            console.log(userExist)
             const user = JSON.stringify(userInfo[2]);
             if (userExist == 'true'){
                 jwt.sign({user: user}, 'user-info', function(err, token){

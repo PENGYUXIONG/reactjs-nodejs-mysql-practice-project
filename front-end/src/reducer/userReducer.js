@@ -1,4 +1,4 @@
-import {LOG_IN, SIGN_UP} from '../actionTypes/ACCOUNT_ACTION.js';
+import {LOG_IN, SIGN_UP, LOG_OUT} from '../actionTypes/ACCOUNT_ACTION.js';
 
 
 const initialState = {
@@ -15,9 +15,6 @@ export default (state = initialState, action)=> {
     default:
       return state;
     case LOG_IN:
-      if(action.payload['token']){;
-        localStorage.setItem('token', action.payload['token']);
-      }
       return {
         ...state,
         loggedIn: action.payload['userInfo'][0],
@@ -35,6 +32,15 @@ export default (state = initialState, action)=> {
           userName: action.payload[0],
           email: action.payload[1]
         },
+      };
+    case LOG_OUT:
+      return {
+        signedUp: null,
+        loggedIn: null,
+        signedUpAvailable: {
+          userName: true,
+          email: true
+        }
       };
   };
 }
