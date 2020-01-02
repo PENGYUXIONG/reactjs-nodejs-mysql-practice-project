@@ -5,7 +5,7 @@ bodyParser = require('body-parser');
 bcryptjs = require('bcryptjs');
 jwt = require('jsonwebtoken');
 generalError = require('../Exceptions/generalError');
-authorizeUser = require('./AuthorizeUser');
+authenticateUser = require('./AuthenticateUser');
 
 router.use(bodyParser.json());
 
@@ -55,7 +55,7 @@ router.post('/signup', async(req, res)=> {
     });
 });
 
-router.post('/getUserInfo', authorizeUser.verifyToken, (req, res) => {
+router.post('/getUserInfo', authenticateUser.verifyToken, (req, res) => {
     jwt.verify(req.token, 'user-info', (err, authData) => {
         console.log(authData)
         if (err){

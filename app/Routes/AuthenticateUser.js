@@ -1,4 +1,4 @@
-class AuthorizeUser{
+class AuthenticateUser{
   verifyToken(req, res, next){
     const bearerHeader = req.headers['authorization'];
     if (typeof bearerHeader !== 'undefined'){
@@ -12,4 +12,4 @@ class AuthorizeUser{
   }
 }
 
-module.exports = new AuthorizeUser()
+module.exports = new AuthenticateUser()
