@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Alert} from 'react-bootstrap';
 
 import NavBar from './commonElements/Navbar';
-import Sidedrawer from './commonElements/sideDrawer/SideDrawer';
 
 
 class SignupSuccessPage extends Component{
@@ -15,7 +14,6 @@ class SignupSuccessPage extends Component{
     return(
       <div className="signupPage">
         <NavBar/>
-        {/* <Sidedrawer/> */}
         <main className="pageContent">
           <div>
           <Alert variant="success">

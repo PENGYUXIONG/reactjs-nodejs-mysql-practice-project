@@ -10,7 +10,6 @@ import NavBar from './commonElements/Navbar';
 import { login } from '../actions/loginAction';
 import {Link} from 'react-router-dom';
 import store from '../store';
-import SideDrawer from './commonElements/sideDrawer/SideDrawer';
 
 class Home extends Component{
   constructor(props){
@@ -78,7 +77,7 @@ class Home extends Component{
 
     // conditional rendering according to the login status
     if (localStorage.getItem('token')){
-      element = 0;
+      element = <h3>Welcome Back! Let's start chatting!"</h3>;
     } else{
       element =       
       <Form onSubmit={this.onSubmit}>
@@ -117,7 +116,6 @@ class Home extends Component{
     return(
       <div className="mainPage"> 
           <NavBar />
-          <SideDrawer />
           <main className="pageContent">
             <div className="loginLayout" >
                 {element}

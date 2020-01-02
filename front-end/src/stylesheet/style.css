@@ -89,7 +89,7 @@
   margin-right: 2rem;
 }
 
-.side-drawer{
+/* .side-drawer{
   height: 100%;
   background: white;
   box-shadow: 2px 0px 5px black;
@@ -97,7 +97,9 @@
   top: 0;
   left: 0;
   width: 400px
-}
+} */
+
+
 
 .log-in-fail-alert {
   margin-top: 3%;
