@@ -48,9 +48,9 @@ class DrawerToggleBtn extends Component {
             onClose={this.onClose}
             visible={this.state.visible}
             >
-            <Link to="/Room/{id}"> Create Room </Link>
+            <Link to={`/Room/${this.props.userInfo.userId}`}> Create Room </Link>
             <br/>
-            <Link to="/Room/{id}"> Join Room </Link>
+            <Link to="/Room"> Join Room </Link>
           </Drawer>
         </div>
       )
