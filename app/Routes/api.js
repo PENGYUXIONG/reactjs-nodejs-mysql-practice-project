@@ -19,24 +19,25 @@ userController = require('../Controller/userController');
 router.post('/login', async(req, res)=>{
     console.log(req.body, 'login');
     
-    await userController.checkUser(req.body['userName'], req.body['passWord'], async function(err, userInfo){
+    await userController.checkUser(req.body['userName'], req.body['passWord'], async function(err, userBoolean, userInfo){
         if (err) throw new generalError('internal error code 500');
         else{
-            const userExist = JSON.stringify(userInfo[0]);
-            const user = JSON.stringify(userInfo[2]);
+            console.log(userBoolean)
+            const userExist = JSON.stringify(userBoolean[0]);
+            const user = JSON.stringify(userInfo);
             if (userExist == 'true'){
                 jwt.sign({user: user}, 'user-info', function(err, token){
                     if (err) {
                         throw new generalError('unknown error occured, cannot generate token');
                     } else{
                         res.json({
-                            userInfo,
+                            userBoolean,
                             token
                         });
                     }
                 });
             } else{
-                res.json({userInfo})
+                res.json({userBoolean})
             }
         }
     });
@@ -56,13 +57,14 @@ router.post('/signup', async(req, res)=> {
 });
 
 router.post('/getUserInfo', authenticateUser.verifyToken, (req, res) => {
+    console.log('fetch user info')
     jwt.verify(req.token, 'user-info', (err, authData) => {
-        console.log(authData)
+        authData.user =  JSON.parse(authData.user)
         if (err){
             throw new generalError('unknown error occured, cannot verify token');
         } else{
             res.json({
-                message: 'sent user info',
+                message: "sent user info",
                 authData
             });
         }

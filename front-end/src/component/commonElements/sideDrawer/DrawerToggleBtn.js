@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import { Drawer, Avatar } from 'antd';
 import '../../../stylesheet/style.css';
 import 'antd/dist/antd.css';
-
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { getuserinfo } from '../../../actions/getUserInfoAction'
 
 class DrawerToggleBtn extends Component {
 
@@ -15,6 +17,7 @@ class DrawerToggleBtn extends Component {
   }
 
   showDrawer() {
+    this.props.getuserinfo();
     if (localStorage.getItem('token')){
       this.setState({
         visible: true,
@@ -29,6 +32,7 @@ class DrawerToggleBtn extends Component {
   };
 
   render(){
+      console.log(this.props)
       return(
         <div>
           <button className = "toggleBtn" onClick={this.showDrawer}>
@@ -37,19 +41,26 @@ class DrawerToggleBtn extends Component {
             <div className='toggleBtn-line'/>
           </button>
             <Drawer
-            title={<div><Avatar> user </Avatar> <h6># {}</h6></div>}
+            title={<div><Avatar> {this.props.userInfo.userName} </Avatar> <h6> {this.props.userInfo.userName} 
+            </h6> <h6>id: {this.props.userInfo.userId}</h6></div>}
             placement="left"
             closable={false}
             onClose={this.onClose}
             visible={this.state.visible}
             >
-            <Link to="/Room/{#id}"> Create Room </Link>
+            <Link to="/Room/{id}"> Create Room </Link>
             <br/>
-            <Link to="/Room/{id:}"> Join Room </Link>
+            <Link to="/Room/{id}"> Join Room </Link>
           </Drawer>
         </div>
       )
     }
 }
 
-export default DrawerToggleBtn;
+function mapStateToProps (state){
+  return{
+    userInfo: state.user,
+  }
+}
+
+export default connect(mapStateToProps, {getuserinfo})(DrawerToggleBtn);
