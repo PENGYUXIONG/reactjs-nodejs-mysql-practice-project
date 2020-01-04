@@ -1,4 +1,4 @@
-import {LOG_IN, SIGN_UP, LOG_OUT} from '../actionTypes/ACCOUNT_ACTION.js';
+import {LOG_IN, SIGN_UP, LOG_OUT, GET_USER_INFO} from '../actionTypes/ACCOUNT_ACTION.js';
 
 
 const initialState = {
@@ -17,11 +17,8 @@ export default (state = initialState, action)=> {
     case LOG_IN:
       return {
         ...state,
-        loggedIn: action.payload['userInfo'][0],
-        signedUp: action.payload['userInfo'][1],
-        userId: action.payload['userInfo'][2].id,
-        userName: action.payload['userInfo'][2].name,
-        email: action.payload['userInfo'][2].email
+        loggedIn: action.payload['userBoolean'][0],
+        signedUp: action.payload['userBoolean'][1]
       };
     case SIGN_UP:
       const isSignedUp = Boolean(action.payload[0] & action.payload[1]);
@@ -42,5 +39,12 @@ export default (state = initialState, action)=> {
           email: true
         }
       };
+    case GET_USER_INFO:
+      return{
+        ...state,
+        userId: action.payload['authData'].user.id,
+        userName: action.payload['authData'].user.name,
+        userEmail: action.payload['authData'].user.email
+      }
   };
 }

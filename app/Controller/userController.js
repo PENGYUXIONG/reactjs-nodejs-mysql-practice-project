@@ -7,7 +7,7 @@ class userController{
 		await userService.getValidateUser(userName, passWord, async function(err, isLoggedIn, isSignedUp, user){
 			if (err) throw new generalError('unknown error occured');
       else{
-				callback(null, [isLoggedIn, isSignedUp, user]);
+				callback(null, [isLoggedIn, isSignedUp], user);
 			}
 		});
   }

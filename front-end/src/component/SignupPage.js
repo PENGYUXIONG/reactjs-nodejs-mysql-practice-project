@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 import NavBar from './commonElements/Navbar';
-import SideDrawer from './commonElements/sideDrawer/SideDrawer';
 import SignupForm from './commonElements/SignupForm';
 
 class SignupPage extends Component{
@@ -14,7 +13,6 @@ class SignupPage extends Component{
     return(
       <div className="signupPage">
         <NavBar/>
-        <SideDrawer/>
         <main className="pageContent">
           <div className="signUpForm">
             <SignupForm/>
