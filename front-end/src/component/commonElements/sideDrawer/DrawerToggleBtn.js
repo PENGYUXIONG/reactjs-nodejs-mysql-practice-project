@@ -51,6 +51,8 @@ class DrawerToggleBtn extends Component {
             <Link to={`/Room/${this.props.userInfo.userId}`}> Create Room </Link>
             <br/>
             <Link to="/Room"> Join Room </Link>
+            <br/>
+            <Link to="/editprofile"> Edit Profile </Link>
           </Drawer>
         </div>
       )

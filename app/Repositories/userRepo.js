@@ -20,9 +20,9 @@ class userRepo{
 	}
 
 	// whether username is still avaliable
-	isValidUser(userName, callback){
-		let query = `SELECT * FROM users WHERE name=?`;
-		let parameter = userName;
+	isValidUser(userName, callback, userId=0){
+		let query = `SELECT * FROM users WHERE name=? AND id<>?`;
+		let parameter = [userName, userId];
 		connection.query(query, parameter, (err, result)=>{
 			if (err) throw new queryError('query failed! cannot fetch user to database');
 			else if (result.length !== 0)callback(null, false);
@@ -33,9 +33,9 @@ class userRepo{
 	}
 
 	// whether email is still avaliable
-	isValidEmail(email, callback){
-		let query = `SELECT * FROM users WHERE email=?`;
-		let parameter = email;
+	isValidEmail(email, callback, userId=0){
+		let query = `SELECT * FROM users WHERE email=? AND id<>?`;
+		let parameter = [email,userId];
 		connection.query(query, parameter, (err, result)=>{
 			if (err) throw new queryError('query failed! cannot fetch user to database');
 			else if (result.length !== 0)callback(null, false);
@@ -51,6 +51,14 @@ class userRepo{
 		let parameter = [userName, passWord, email];
 		connection.query(query, parameter, (err, result)=>{
 			if (err) throw new queryError('query failed! cannot save the new user to database');
+		});
+	}
+
+	updateUser(id, userName, passWord, email){
+		let query = `UPDATE users SET name = ?, password = ?, email = ? WHERE id = ?`;
+		let parameter = [userName, passWord, email, id];
+		connection.query(query, parameter, (err, result)=>{
+			if (err) throw new queryError('query failed! cannot update the user in database');
 		});
 	}
 }

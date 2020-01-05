@@ -29,6 +29,15 @@ class userController{
       }
     });
   }
+
+  updateUser(userId, userName, passWord, email, callback){
+    userService.updateUser(userId, userName, passWord, email, function(err, UserNotExistBoolean, EmailNotExistBoolean){
+      if (err) throw new generalError('unknown error occured!');
+      else{
+        callback(null, UserNotExistBoolean, EmailNotExistBoolean);
+      }
+    });
+  }
 }
 
 module.exports = new userController()
