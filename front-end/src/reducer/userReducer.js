@@ -1,4 +1,4 @@
-import {LOG_IN, SIGN_UP, LOG_OUT, GET_USER_INFO} from '../actionTypes/ACCOUNT_ACTION.js';
+import {LOG_IN, SIGN_UP, LOG_OUT, GET_USER_INFO, UPDATE_USER_INFO} from '../actionTypes/ACCOUNT_ACTION.js';
 
 
 const initialState = {
@@ -45,6 +45,15 @@ export default (state = initialState, action)=> {
         userId: action.payload['authData'].user.id,
         userName: action.payload['authData'].user.name,
         userEmail: action.payload['authData'].user.email
+      }
+    case UPDATE_USER_INFO:
+      localStorage.setItem('token', action.payload['token']);
+      return{
+        ...state,
+        signedUpAvailable: {
+          userName: action.payload['UserUpdateBoolean'][0],
+          email: action.payload['UserUpdateBoolean'][1]
+        },
       }
   };
 }

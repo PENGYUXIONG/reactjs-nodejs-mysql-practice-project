@@ -62,6 +62,11 @@
   margin-top: 2rem;
 }
 
+.editProfileForm{
+  margin: auto;
+  margin-top: 2rem;
+}
+
 .space{
   flex: 1;
 }

@@ -12,7 +12,7 @@ class NotFoundPage extends Component{
   }
   render(){
     return(
-      <div className="signupPage">
+      <div className="NotFOundPage">
         <NavBar/>
         <main className="pageContent">
           <div>

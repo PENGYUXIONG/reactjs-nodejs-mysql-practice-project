@@ -12,7 +12,7 @@ class AboutusPage extends Component{
   }
   render(){
     return(
-      <div className="signupPage">
+      <div className="AbountusPage">
         <NavBar/>
         <main className="pageContent">
           <div>

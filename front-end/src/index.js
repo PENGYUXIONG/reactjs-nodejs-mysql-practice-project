@@ -7,8 +7,11 @@ import SignupPage from './component/SignupPage';
 import SignupSuccessPage from './component/SignupSuccessPage';
 import NotFoundPage from './component/NotFoundPage';
 import AboutusPage from './component/AboutusPage';
+import EditProfilePage from './component/EditProfilePage';
+import NoAccessPage from './component/NoAccessPage';
 import Home from './component/Home';
 import './stylesheet/style.css';
+
 
 render(
   <Provider store={initStore}>
@@ -18,6 +21,8 @@ render(
         <Route exact path="/signup" component={SignupPage} />
         <Route exact path="/signupSuccess" component={SignupSuccessPage} />
         <Route exact path="/aboutus" component={AboutusPage} />
+        <Route exact path="/editprofile" component={EditProfilePage} />
+        <Route exact path="/NoAccess" component={NoAccessPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </Router>
