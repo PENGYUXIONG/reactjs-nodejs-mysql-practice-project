@@ -27,7 +27,10 @@ app.listen(port, ()=>{
 // socket io server
 
 io.on('connection', function(socket){
-    console.log('a user connected');
+    socket.on('user-join', (userName) => {
+        console.log(`${userName} joined`)
+        socket.broadcast.emit('new-user', userName)
+    })
     socket.on('user-chat-message', message => {
         console.log(message)
         socket.broadcast.emit('chat-message', message);

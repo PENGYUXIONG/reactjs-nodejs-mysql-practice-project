@@ -3,17 +3,19 @@ import { Chat } from '@progress/kendo-react-conversational-ui';
 import '@progress/kendo-theme-default/dist/all.css';
 import { connect } from 'react-redux';
 import io from "socket.io-client";
-
 import { getuserinfo } from '../actions/getUserInfoAction';
 import NavBar from './commonElements/Navbar'
-
 
 class RoomPage extends Component{
   constructor(props){
     super(props);
+
     this.state = {
       messages: []
     };
+
+    this.join = false;
+    
 
     this.socket = io("http://localhost:3000").connect();
 
@@ -21,13 +23,23 @@ class RoomPage extends Component{
     this.receiveNewMessage = this.receiveNewMessage.bind(this);
   }
 
-  
+  componentDidUpdate(){
+    if (!this.join){
+      this.socket.emit('user-join', this.props.userInfo.userName);
+      this.join = true;
+    }
+  }
 
   componentWillMount(){
     this.props.getuserinfo();
+
     this.socket.on('chat-message', data => {
       data.timestamp = new Date(new Date(data.timestamp).toLocaleString());
       this.receiveNewMessage(data);
+    })
+
+    this.socket.on('new-user', userName => {
+      console.log(`${userName}`)
     })
   }
 
@@ -45,10 +57,12 @@ class RoomPage extends Component{
   };
 
   render() {
+
     this.user = {
       id: this.props.userInfo.userId,
       name: this.props.userInfo.userName
     };
+
     return (
         <div className="roomPage">
           <NavBar/>

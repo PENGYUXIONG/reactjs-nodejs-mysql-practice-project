@@ -60,7 +60,7 @@ class JoinRoomModal extends Component {
           onCancel={this.handleCancel}
         >
           <div style={{ marginBottom: 16 }}>
-            <Input placeholder="Room id" name="roomId" onChange={this.onChange}/>
+            <Input placeholder="Room id" name="roomName" onChange={this.onChange}/>
           </div>
           
           <div style={{ marginBottom: 16 }}>
