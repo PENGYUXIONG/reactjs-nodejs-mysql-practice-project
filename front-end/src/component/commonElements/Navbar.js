@@ -10,11 +10,12 @@ const NavBar = (props) =>{
   const onClick = () => {
     localStorage.removeItem("token");
     props.logout()
+    window.location.href = "/";
   }
 
   let conditionalLink = <Link to="/signup">Sign Up</Link>;
   if (localStorage.getItem('token')){
-    conditionalLink = <Link to="/" onClick={onClick}>Log Out</Link>
+    conditionalLink = <Link to="#" onClick={onClick}>Log Out</Link>
   }
   return(
     <header className="navBar">

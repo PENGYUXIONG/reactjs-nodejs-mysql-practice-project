@@ -11,6 +11,10 @@
   "author": "Pengyu Xiong",
   "license": "ISC",
   "dependencies": {
+    "@progress/kendo-react-buttons": "^3.9.0",
+    "@progress/kendo-react-conversational-ui": "^3.9.0",
+    "@progress/kendo-react-intl": "^3.9.0",
+    "@progress/kendo-theme-default": "^4.10.0",
     "antd": "^3.26.5",
     "bootstrap": "^4.4.1",
     "prop-types": "^15.7.2",
@@ -22,7 +26,8 @@
     "reactstrap": "^8.0.0",
     "redux": "^4.0.1",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "socket.io-client": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

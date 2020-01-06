@@ -5,7 +5,9 @@ import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { getuserinfo } from '../../../actions/getUserInfoAction'
+import { getuserinfo } from '../../../actions/getUserInfoAction';
+import CreateRoomModal from '../CreateRoomModal';
+import JoinRoomModal from '../JoinRoomModal';
 
 class DrawerToggleBtn extends Component {
 
@@ -48,10 +50,8 @@ class DrawerToggleBtn extends Component {
             onClose={this.onClose}
             visible={this.state.visible}
             >
-            <Link to={`/Room/${this.props.userInfo.userId}`}> Create Room </Link>
-            <br/>
-            <Link to="/Room"> Join Room </Link>
-            <br/>
+            <CreateRoomModal/>
+            <JoinRoomModal/>
             <Link to="/editprofile"> Edit Profile </Link>
           </Drawer>
         </div>
