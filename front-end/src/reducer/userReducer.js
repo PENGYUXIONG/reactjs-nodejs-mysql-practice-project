@@ -53,7 +53,8 @@ export default (state = initialState, action)=> {
         signedUpAvailable: {
           userName: action.payload['UserUpdateBoolean'][0],
           email: action.payload['UserUpdateBoolean'][1]
-        },
+        }
       }
+      
   };
 }

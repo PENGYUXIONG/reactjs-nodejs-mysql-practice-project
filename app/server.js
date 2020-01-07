@@ -27,16 +27,27 @@ app.listen(port, ()=>{
 // socket io server
 
 io.on('connection', function(socket){
-    socket.on('user-join', (userName) => {
-        console.log(`${userName} joined`)
-        socket.broadcast.emit('new-user', userName)
+    socket.on('user-join', (roomObject) => {
+        const room = roomObject.roomName;
+        const curUser = roomObject.userName;
+        
+        console.log(`${roomObject.userName} joined ${roomObject.roomName}`)
+        socket.join(roomObject.roomName);
+
+        socket.in(room).broadcast.emit('new-user', roomObject.userName);
+
+        socket.in(room).on('user-chat-message', message => {
+            console.log(message, room)
+            socket.in(room).broadcast.emit('chat-message', message);
+        })
+
+        socket.in(room).on('disconnect', function(){
+            console.log(`${curUser} disconnected from ${room}`);
+            socket.in(room).broadcast.emit('user-left', curUser);
+            socket.leave(socket.room);
+          });
     })
-    socket.on('user-chat-message', message => {
-        console.log(message)
-        socket.broadcast.emit('chat-message', message);
-    })
-    socket.on('disconnect', function(){
-        console.log('user disconnected');
-      });
+    
+
 });
 
