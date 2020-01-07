@@ -13,6 +13,7 @@ router.use(bodyParser.json());
 generalError = require('../Exceptions/generalError');
 // import services from the other files
 userController = require('../Controller/userController');
+roomController = require('../Controller/roomController');
 
 
 // endpoints apis start
@@ -118,6 +119,31 @@ router.post('/updateUserInfo', authenticateUser.verifyToken, (req, res) => {
                     }
                 }
             });
+        }
+    });
+});
+
+router.post('/createRoom', async (req, res) => {
+    console.log('create room')
+    const salt = await bcryptjs.genSalt(10);
+    const hashedPassword = await bcryptjs.hash(req.body['passWord'], salt);
+    roomController.saveValidateRoom(req.body['roomName'], hashedPassword, function(err, roomSavedBoolean){
+        if(err){
+            throw new generalError('unknown error occured, cannot save validated room')
+        } else{
+            res.json({roomSavedBoolean});
+        }
+    });
+});
+
+router.post('/joinRoom', async (req, res) => {
+    console.log('join room')
+    roomController.getValidateRoom(req.body['roomName'], req.body['passWord'], function(err, room){
+        if(err){
+            throw new generalError('unknown error occured, cannot get validated room')
+        } else{
+            console.log(room)
+            res.json({room});
         }
     });
 });
