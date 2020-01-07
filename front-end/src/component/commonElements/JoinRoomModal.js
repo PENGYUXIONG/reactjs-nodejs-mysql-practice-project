@@ -97,7 +97,7 @@ class JoinRoomModal extends Component {
           Join Room
         </Link>
         <Modal
-          title="Create Room"
+          title="Join Room"
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}

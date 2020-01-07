@@ -60,7 +60,7 @@ class CreateRoomModal extends Component {
   afterClose(){
     if (this.props.roomSavedBoolean){
       window.location.href = "/room";
-    } else if(this.state.roomName){
+    } else if(this.state.roomName && this.props.roomSavedBoolean === false){
       const modal = Modal.warning();
 
       modal.update({
