@@ -76,7 +76,7 @@ class Home extends Component{
  
 
     // conditional rendering according to the login status
-    if (localStorage.getItem('token')){
+    if (localStorage.getItem('token') && localStorage.getItem('token')!=='undefined'){
       element = <h3>Welcome Back! Let's start chatting!"</h3>;
     } else{
       element =       

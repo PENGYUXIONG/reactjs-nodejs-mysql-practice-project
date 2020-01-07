@@ -14,7 +14,7 @@ const NavBar = (props) =>{
   }
 
   let conditionalLink = <Link to="/signup">Sign Up</Link>;
-  if (localStorage.getItem('token')){
+  if (localStorage.getItem('token') && localStorage.getItem('token')!=='undefined'){
     conditionalLink = <Link to="#" onClick={onClick}>Log Out</Link>
   }
   return(

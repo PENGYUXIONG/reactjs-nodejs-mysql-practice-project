@@ -4,18 +4,20 @@ import '@progress/kendo-theme-default/dist/all.css';
 import { connect } from 'react-redux';
 import io from "socket.io-client";
 import { getuserinfo } from '../actions/getUserInfoAction';
+
 import NavBar from './commonElements/Navbar'
 
 class RoomPage extends Component{
   constructor(props){
     super(props);
 
+    const roomName = localStorage.getItem('roomName');
     this.state = {
+      users: [],
+      join: false,
+      roomName: roomName,
       messages: []
-    };
-
-    this.join = false;
-    
+    }; 
 
     this.socket = io("http://localhost:3000").connect();
 
@@ -24,9 +26,9 @@ class RoomPage extends Component{
   }
 
   componentDidUpdate(){
-    if (!this.join){
-      this.socket.emit('user-join', this.props.userInfo.userName);
-      this.join = true;
+    if (!this.state.join){
+      this.socket.emit('user-join', {userName: this.props.userInfo.userName, roomName: this.state.roomName});
+      this.state.join = true;
     }
   }
 
@@ -39,7 +41,13 @@ class RoomPage extends Component{
     })
 
     this.socket.on('new-user', userName => {
-      console.log(`${userName}`)
+      console.log(`${userName} join`)
+      this.state.users.push(userName);
+    })
+
+    this.socket.on('user-left', userName => {
+      console.log(`${userName} left`)
+      this.state.users.pop(userName);
     })
   }
 
@@ -63,12 +71,15 @@ class RoomPage extends Component{
       name: this.props.userInfo.userName
     };
 
+    console.log(this.state.users)
+
     return (
         <div className="roomPage">
           <NavBar/>
           <main className="pageContent">
             <div className="chatContent">
-              <h6 className="roomName"> Room Name </h6>
+              <h6 className="roomName"> {this.state.roomName} </h6>
+               <h6>{this.state.users}</h6>
               <Chat user={this.user}
                   messages={this.state.messages}
                   onMessageSend={this.addNewMessage}
